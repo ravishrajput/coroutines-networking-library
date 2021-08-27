@@ -1,9 +1,14 @@
 name: Publish
 
 on:
-  release:
-    # We'll run this workflow when a new GitHub release is created
-    types: [released]
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      # Push events on main branch
+      - main
+      # Push events to branches matching refs/heads/releases/10
+      - 'releases/**'
+      - 'releases-**'
 
 jobs:
   publish:
