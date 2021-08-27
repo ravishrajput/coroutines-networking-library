@@ -1,8 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'maven-publish'
 }
+
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
 
 android {
     compileSdk 31
@@ -44,28 +45,4 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-                // You can then customize attributes of the publication as shown below.
-                groupId = 'com.ravishrajput'
-                artifactId = 'coroutines-networking'
-                version libVersion
-            }
-            // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
-                // Applies the component for the debug build variant.
-                from components.debug
-                groupId = 'com.ravishrajput'
-                artifactId = 'coroutines-networking-debug'
-                version libVersion
-            }
-        }
-    }
 }
